@@ -13,6 +13,8 @@ import { theme } from "./src/infrastructure/theme";
 import RestaurantsScreen from "./src/features/restaurants/screens/restaurants.screen";
 import { SafeArea } from "./src/components/utility/safe-area.component";
 import { Text } from "react-native";
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "./src/services/location/location.context";
 
 export default function App() {
   let [oswaldLoaded] = useOswald({
@@ -52,15 +54,19 @@ export default function App() {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator screenOptions={screenOptions}>
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-            <Tab.Screen name="Map" component={Map} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </ThemeProvider>
-      <ExpoStatusBar style="auto" />
+      <LocationContextProvider>
+        <RestaurantsContextProvider>
+          <ThemeProvider theme={theme}>
+            <NavigationContainer>
+              <Tab.Navigator screenOptions={screenOptions}>
+                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+                <Tab.Screen name="Map" component={Map} />
+              </Tab.Navigator>
+            </NavigationContainer>
+          </ThemeProvider>
+          <ExpoStatusBar style="auto" />
+        </RestaurantsContextProvider>
+      </LocationContextProvider>
     </>
   );
 }

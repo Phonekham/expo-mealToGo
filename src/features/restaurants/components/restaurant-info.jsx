@@ -19,15 +19,15 @@ import {
 
 const RestaurantInfo = ({ restaurant = {} }) => {
   const {
-    name = "name",
+    name = "Some Restaurant",
+    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
     photos = [
-      "https://callstack.github.io/react-native-paper/screenshots/card-3.png",
+      "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
     ],
-    address = "address",
+    address = "100 some random street",
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
-    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
   } = restaurant;
   const ratingArray = Array.from(new Array(Math.floor(rating)));
 
