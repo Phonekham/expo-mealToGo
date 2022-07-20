@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { FlatList } from "react-native";
+import { FlatList, Pressable } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import styled from "styled-components";
 
@@ -23,7 +23,7 @@ const LoadingContainer = styled.View`
   left: 50%;
 `;
 
-export default function RestaurantsScreen() {
+export default function RestaurantsScreen({ navigation }) {
   const restaurantContext = useContext(RestaurantsContext);
   const { isLoading, restaurants } = restaurantContext;
 
@@ -38,9 +38,11 @@ export default function RestaurantsScreen() {
       <RestaurantList
         data={restaurants}
         renderItem={() => (
-          <Spacer position="bottom" size="large">
-            <RestaurantInfo />
-          </Spacer>
+          <Pressable onPress={() => navigation.navigate("RestaurantDetail")}>
+            <Spacer position="bottom" size="large">
+              <RestaurantInfo />
+            </Spacer>
+          </Pressable>
         )}
         keyExtractor={(Item) => Item.name}
       />
