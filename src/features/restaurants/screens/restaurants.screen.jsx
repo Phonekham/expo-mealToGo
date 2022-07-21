@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import { FlatList, Pressable } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import styled from "styled-components";
 
@@ -37,12 +37,16 @@ export default function RestaurantsScreen({ navigation }) {
       <Search />
       <RestaurantList
         data={restaurants}
-        renderItem={() => (
-          <Pressable onPress={() => navigation.navigate("RestaurantDetail")}>
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("RestaurantDetail", { restaurant: item })
+            }
+          >
             <Spacer position="bottom" size="large">
               <RestaurantInfo />
             </Spacer>
-          </Pressable>
+          </TouchableOpacity>
         )}
         keyExtractor={(Item) => Item.name}
       />
